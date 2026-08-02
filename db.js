@@ -4,7 +4,7 @@ const pg = require("pg");
 require("dotenv").config();
 
 // PostgreSQL (Sequelize) Setup
-const postgresUri = process.env.POSTGRES_URI || "";
+const postgresUri = process.env.POSTGRES_URI || "postgres://user:pass@localhost:5432/neondb";
 const sequelize = new Sequelize(postgresUri, {
   dialect: "postgres",
   dialectModule: pg,

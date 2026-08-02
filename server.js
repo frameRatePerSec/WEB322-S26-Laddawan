@@ -340,6 +340,10 @@ app.post("/tasks/status/:id", ensureLogin, async (req, res) => {
 });
 
 // Start Express Server
-app.listen(PORT, () => {
-  console.log(`🚀 Express server running on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, () => {
+    console.log(`🚀 Express server running on port ${PORT}`);
+  });
+}
+
+module.exports = app;
