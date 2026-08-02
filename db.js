@@ -16,6 +16,7 @@ const sequelize = new Sequelize(postgresUri, {
   },
   logging: false,
 });
+sequelize.config.dialectModule = pg;
 
 // Import Task Model
 const Task = require("../models/Task")(sequelize);
