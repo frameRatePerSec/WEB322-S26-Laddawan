@@ -1,0 +1,40 @@
+<form
+  class="card w-96 bg-base-100 shadow-lg p-6 space-y-6"
+  method="POST"
+  action="/register"
+>
+  <h2 class="card-title text-primary">Register</h2>
+
+  {{#if errorMessage}}
+    <div class="alert alert-error text-sm py-2 rounded-lg">
+      <span>{{errorMessage}}</span>
+    </div>
+  {{/if}}
+
+  <input
+    name="username"
+    type="text"
+    placeholder="Username"
+    class="input input-bordered w-full"
+    value="{{username}}"
+    required
+  />
+  <input
+    name="email"
+    type="email"
+    placeholder="Email"
+    class="input input-bordered w-full"
+    value="{{email}}"
+    required
+  />
+  <input
+    name="password"
+    type="password"
+    placeholder="Password"
+    class="input input-bordered w-full"
+    required
+  />
+  <button class="btn btn-primary w-full" type="submit">Register</button>
+
+  <a href="/login" class="link link-primary">Already have an account?</a>
+</form>

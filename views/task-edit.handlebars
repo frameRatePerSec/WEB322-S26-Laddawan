@@ -1,0 +1,38 @@
+<form
+  class="card w-96 bg-base-100 shadow-lg p-6 space-y-4"
+  method="POST"
+  action="/tasks/edit/{{task.id}}"
+>
+  <h2 class="card-title text-primary">Edit Task</h2>
+
+  <input
+    name="title"
+    type="text"
+    placeholder="Title"
+    class="input input-bordered w-full"
+    value="{{task.title}}"
+    required
+  />
+
+  <textarea
+    name="description"
+    placeholder="Description"
+    class="textarea textarea-bordered w-full h-24"
+  >{{task.description}}</textarea>
+
+  <input
+    name="dueDate"
+    type="date"
+    class="input input-bordered w-full"
+    value="{{task.dueDate}}"
+  />
+
+  <select name="status" class="select select-bordered w-full">
+    <option value="pending" {{#if (eq task.status "pending")}}selected{{/if}}>Pending</option>
+    <option value="completed" {{#if (eq task.status "completed")}}selected{{/if}}>Completed</option>
+  </select>
+
+  <button class="btn btn-primary w-full" type="submit">Update Task</button>
+
+  <a href="/tasks" class="link link-primary inline-block">Back to Tasks</a>
+</form>

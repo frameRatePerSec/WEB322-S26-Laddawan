@@ -1,0 +1,56 @@
+<div class="w-full max-w-4xl space-y-6">
+  <div class="flex justify-between items-center">
+    <h1 class="text-3xl font-bold text-primary">Your Tasks</h1>
+    <a href="/tasks/add" class="btn btn-primary">Add New Task</a>
+  </div>
+
+  {{#if tasks.length}}
+    <div class="space-y-4">
+      {{#each tasks}}
+        <div class="card bg-base-100 shadow-md p-6 relative space-y-3">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xl font-bold text-base-content">{{this.title}}</h3>
+            {{#if (eq this.status "completed")}}
+              <span class="badge badge-success p-3 text-sm">completed</span>
+            {{else}}
+              <span class="badge badge-warning p-3 text-sm">pending</span>
+            {{/if}}
+          </div>
+
+          {{#if this.description}}
+            <p class="text-base-content/80">{{this.description}}</p>
+          {{/if}}
+
+          {{#if this.dueDate}}
+            <p class="text-sm text-base-content/60">Due: {{formatDate this.dueDate}}</p>
+          {{/if}}
+
+          <div class="flex flex-wrap gap-2 pt-2">
+            <a href="/tasks/edit/{{this.id}}" class="btn btn-info btn-sm">Edit</a>
+            
+            <form method="POST" action="/tasks/delete/{{this.id}}" class="inline">
+              <button type="submit" class="btn btn-error btn-sm">Delete</button>
+            </form>
+
+            <form method="POST" action="/tasks/status/{{this.id}}" class="inline">
+              {{#if (eq this.status "completed")}}
+                <button type="submit" class="btn btn-accent btn-sm">Mark as Pending</button>
+              {{else}}
+                <button type="submit" class="btn btn-accent btn-sm">Mark as Completed</button>
+              {{/if}}
+            </form>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <div class="card bg-base-100 shadow-md p-8 text-center text-base-content/70">
+      <p class="text-lg">No tasks found. Click "Add New Task" to create your first task!</p>
+    </div>
+  {{/if}}
+
+  <div class="flex gap-4 pt-4">
+    <a href="/dashboard" class="btn btn-primary">Back to Dashboard</a>
+    <a href="/logout" class="btn btn-warning">Logout</a>
+  </div>
+</div>
