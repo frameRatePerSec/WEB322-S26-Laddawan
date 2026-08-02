@@ -14,6 +14,8 @@ const express = require("express");
 const { engine } = require("express-handlebars");
 const clientSessions = require("client-sessions");
 const bcrypt = require("bcryptjs");
+const pg = require("pg");
+require("pg-hstore");
 require("dotenv").config();
 
 const { connectMongo, connectPostgres, Task } = require("./config/db");
