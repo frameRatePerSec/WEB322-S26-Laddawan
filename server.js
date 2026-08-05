@@ -99,6 +99,10 @@ app.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
+    // Ensure MongoDB is connected before touching User (serverless cold starts
+    // otherwise race findOne() against the in-flight connection and time out).
+    await connectMongo();
+
     // Check if username or email already exists
     const existingUser = await User.findOne({
       $or: [{ username: username.trim() }, { email: email.trim().toLowerCase() }],
@@ -146,6 +150,10 @@ app.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   try {
+    // Ensure MongoDB is connected before touching User (serverless cold starts
+    // otherwise race findOne() against the in-flight connection and time out).
+    await connectMongo();
+
     // Find user in MongoDB
     const user = await User.findOne({ username: username.trim() });
 
